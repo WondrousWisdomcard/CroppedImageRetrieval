@@ -70,7 +70,8 @@ def load_data(d_path, path_list, num=100, hw=(224, 224)):
         data = init_process(d_path + path, i)
         data_list.append(data)
 
-    if len(data_list[0]) <= num or num == 0:
+    if len(data_list[0]) <= num:
+        print("Data from one class is less than", num)
         num = int(len(data_list[0]) * 0.8)
         print("We set train 80%, and test 20%, change train num to", num)
 

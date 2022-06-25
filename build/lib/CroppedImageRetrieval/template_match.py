@@ -231,14 +231,14 @@ def retrieval_template_match(template_path, image_file_list, resize_rate=1, rota
         print("[INFO] Size satisfied: ", count, "/", len(image_file_list), "Images")
         print("[INFO] Top 5 Match: ", best_match_info)
 
-        # show_image("Template", template, 400)
-        # i = 1
-        # for image_path, v in best_match_info:
-        #     image_best = cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), -1)
-        #     show_image("Result" + str(i), image_best, 600)
-        #     i += 1
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
+        show_image("Template", template, 400)
+        i = 1
+        for image_path, v in best_match_info:
+            image_best = cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), -1)
+            show_image("Result" + str(i), image_best, 600)
+            i += 1
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         print("If template.py doesn't stopped, try 'ctrl + z'")
 
     return best_match_info, time_cost
