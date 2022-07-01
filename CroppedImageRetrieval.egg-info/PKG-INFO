@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: CroppedImageRetrieval
-Version: 0.1
+Version: 0.2
 Summary: UNKNOWN
 Home-page: https://github.com/WondrousWisdomcard/cropped-image-retrieval-sdk.git
 Author: Max Zheng
@@ -19,7 +19,7 @@ Description: # 残缺图像检索 SDK
         * **优化策略**：
           * **压缩图像**，在图像比较大的时候可以使用压缩来提高速度。
           * **多角度模板匹配**：设定多个模板旋转角度和镜像模板，一旦一轮检测结束时检测到高于 thredhold 的可信度就不在进行模板的下一次旋转。
-          * **多尺寸模板匹配**：设置两个缩放尺度（长宽同时缩小 2 倍、增大 2 倍），一旦一轮检测结束时检测到高于 thredhold 的可信度就不在进入下一个尺度。
+          * **多尺寸模板匹配**：设置多个缩放尺度，一旦一轮检测结束时检测到高于 thredhold 的可信度就不在进入下一个尺度。
         
         ### 二、函数说明
         
@@ -36,6 +36,8 @@ Description: # 残缺图像检索 SDK
         
         * 输出：
           * `best_match_info` 返回可信度最高的五张原图的列表，每个元素是（文件名，可信度）二元组，按可信度从大到小排序
+        
+        * **提示：如果裁剪图没有没有较原图进行缩放，可以将 zoom 设置为 False；如果裁剪图没有较原图进行旋转，可以将 rotate 设为 False 以缩短检索时间。**
         
         ## 方法二：分类神经网络
         
@@ -91,6 +93,7 @@ Description: # 残缺图像检索 SDK
           例如，原图保存在 `/home/xxx/Data/Tag/` 中，创建文件夹 `/home/xxx/Crop/Tag/` 以保存随机裁剪结果，创建文件夹 `/home/xxx/Info/Tag/` 以保存类别—图片映射表`info.csv`，该文件在测试时需要使用。
           
           ```python
+          import CroppedImageRetrieval
           data_path = "/home/xxx/Data/Tag/"
           crop_path = "/home/xxx/Crop/Tag/"
           info_path = "/home/xxx/Info/Tag/"
@@ -111,6 +114,7 @@ Description: # 残缺图像检索 SDK
         例如， `/home/xxx/Crop/Tag/` 保存随机裁剪结果，图片数目为 172，使用 ResNet18 训练 3 个 Epoch，将模型保存至 `/home/xxx/Model/Tag/resnet.pth`
         
         ```python
+        import CroppedImageRetrieval
         crop_path = "/home/xxx/Crop/Tag/"
         model_path= "/home/xxx/Model/Tag/resnet.pth"
         CroppedImageRetrieval.model_train(crop_path, model_path, 172, 3)
@@ -129,6 +133,7 @@ Description: # 残缺图像检索 SDK
         例如， `/home/xxx/Model/Tag/` 保存训练的模型，图片数目为 172，映射表的文件路径是 ` /home/xxx/Info/Tag/info.csv`，我们将寻找 `./Data/TagCut/000010.jpg` 对应的原图。
         
         ```python
+        import CroppedImageRetrieval
         model_path = "/home/xxx/Model/Tag/resnet.pth"
         info_path = "/home/xxx/Info/Tag/info.csv"
         image_path = "./Data/TagCut/000010.jpg"
@@ -178,7 +183,8 @@ Description: # 残缺图像检索 SDK
         | **无线** |    178     |   **96.07%**   |   **98.88%**   |     0.16 秒      |     0.12 秒      |
         | **隐患** |    190     |   **96.32%**   |   **99.47%**   |     0.18 秒      |     0.09 秒      |
         
+        ### BugFix 日志
         
-        
+        * 2022.7.1 修改了模板匹配算法对模板进行缩放时的错误，并增加了两个缩放尺度：[0.5,2] -> [0.5, 0.75, 1.5, 2]。
         
 Platform: UNKNOWN

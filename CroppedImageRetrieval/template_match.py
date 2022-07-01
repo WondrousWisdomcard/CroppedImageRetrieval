@@ -183,7 +183,7 @@ def retrieval_template_match(template_path, image_file_list, resize_rate=1, rota
 
     # Consider the scaling of the template
     if size:
-        template_resize_choice = [0.5, 2]
+        template_resize_choice = [0.5, 0.75, 1.5, 2]
         for template_resize in template_resize_choice:
             if get_it:
                 break
@@ -193,6 +193,7 @@ def retrieval_template_match(template_path, image_file_list, resize_rate=1, rota
                 print("Resize Template Stage:", template_resize)
             template = cv2.imdecode(np.fromfile(template_path, dtype=np.uint8), -1)
             templateGray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+            template_h, template_w = templateGray.shape
             templateResize = cv2.resize(templateGray,
                                         (int(template_w / resize_rate), int(template_h / resize_rate)))
             template_h, template_w = templateResize.shape
