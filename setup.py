@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="CroppedImageRetrieval",
-    version="0.2",
+    version="0.3",
     url='https://github.com/WondrousWisdomcard/cropped-image-retrieval-sdk.git',
     long_description=open('README.md', encoding='UTF-8').read(),
     packages=find_packages(),

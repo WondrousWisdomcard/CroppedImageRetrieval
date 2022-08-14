@@ -5,6 +5,8 @@ from CroppedImageRetrieval.crop import *
 from CroppedImageRetrieval.cnn import *
 from CroppedImageRetrieval.cnn_test import *
 
+from CroppedImageRetrieval.sift_match import *
+
 
 """
 * TEMPLATE_RETRIEVAL

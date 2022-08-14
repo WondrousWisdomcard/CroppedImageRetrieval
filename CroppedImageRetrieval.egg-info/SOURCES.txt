@@ -8,6 +8,7 @@ CroppedImageRetrieval/cnn_test.py
 CroppedImageRetrieval/crop.py
 CroppedImageRetrieval/data_utils.py
 CroppedImageRetrieval/my_util.py
+CroppedImageRetrieval/sift_match.py
 CroppedImageRetrieval/template_match.py
 CroppedImageRetrieval.egg-info/PKG-INFO
 CroppedImageRetrieval.egg-info/SOURCES.txt
